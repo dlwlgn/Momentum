@@ -192,4 +192,9 @@ async function renderModalIcon(){
     memos();
     renderWeather();
     renderModalIcon();
+    setInterval(()=>{
+        renderWeather();
+        renderModalIcon();
+    }, 5000)
+    
 })();
