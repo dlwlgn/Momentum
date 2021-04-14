@@ -16,7 +16,7 @@ function setTime(){
     const timerContent = document.querySelector(".timer-content");
     setInterval(() => {
         const date = new Date();
-        timer.textContent = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+        timer.textContent = `${date.getHours().toString().padStart(2,"0")}:${date.getMinutes().toString().padStart(2,"0")}:${date.getSeconds().toString().padStart(2,"0")}`;
         if (date.getHours() >= 12) timerContent.textContent = 'Good Evening Jihun'
         else timerContent.textContent = 'Good Morning Jihun'
     }, 1000)
