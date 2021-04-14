@@ -85,22 +85,22 @@ function matchIcon(weatherData){
 async function get5DaysWeather(latitude, longitude){
     //위도와 경도가 있는 경우
     if(latitude && longitude){
-        const data = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=99aca4a42befae82a1b06702817b5628`)
+        const data = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=99aca4a42befae82a1b06702817b5628`)
         return data;
     }
     //위도와 경도가 없는 경우
-    const data = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=Seoul&appid=99aca4a42befae82a1b06702817b5628`)
+    const data = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=Seoul&appid=99aca4a42befae82a1b06702817b5628`)
     return data;
 }
 
 async function getCurWeather(latitude, longitude) {
     //위도와 경도가 있는 경우
     if (latitude && longitude) {
-        const data = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=99aca4a42befae82a1b06702817b5628`)
+        const data = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=99aca4a42befae82a1b06702817b5628`)
         return data;
     }
     //위도와 경도가 없는 경우
-    const data = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=99aca4a42befae82a1b06702817b5628`)
+    const data = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=99aca4a42befae82a1b06702817b5628`)
     return data;
 }
 
@@ -141,25 +141,19 @@ async function renderWeather(){
         console.log(err);
     }
     finally{ //에러가 없으면 try후 넘어옴
-        console.log("test 5days");
         const weatherResponse = await get5DaysWeather(latitude, longitude);
-        console.log("test 5days0");
         const weatherData = weatherResponse.data;
-        console.log("test 5days1");
         const weatherList = weatherData.list.reduce((acc,cur)=>{
             if(cur.dt_txt.indexOf("18:00:00")>0){
                 acc.push(cur);
             }
             return acc;
         },[]);
-        console.log("test 5days2");
         // console.log(weatherList);
         const modalBody = document.querySelector(".modal-body");
-        console.log("test 5days3");
         modalBody.innerHTML = weatherList.map(li=>{
             return weatherWrapperComponent(li);
         }).join(""); //배열을 한 문자열로 합친다.
-        console.log("test 5days4");
     }
 }
 
@@ -176,11 +170,9 @@ async function renderModalIcon(){
         console.log(err);
     }
     finally { //에러가 없으면 try후 넘어옴
-        console.log("test cur");
         const weatherResponse = await getCurWeather(latitude, longitude);
         const weatherData = weatherResponse.data;
         const curWeather = weatherData.weather[0].main;
-        //console.log(weatherData)
         const modalIcon = document.querySelector(".modal-button");
         modalIcon.style.backgroundImage = `url(".${matchIcon(curWeather)}")`;
     }
