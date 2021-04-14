@@ -174,7 +174,7 @@ async function renderModalIcon(){
         const weatherData = weatherResponse.data;
         const curWeather = weatherData.weather[0].main;
         const modalIcon = document.querySelector(".modal-button");
-        modalIcon.style.backgroundImage = `url(".${matchIcon(curWeather)}")`;
+        modalIcon.style.backgroundImage = `url("${matchIcon(curWeather)}")`;
     }
 }
 
