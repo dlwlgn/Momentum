@@ -141,7 +141,7 @@ async function renderWeather(){
         console.log(err);
     }
     finally{ //에러가 없으면 try후 넘어옴
-        //console.log("test 5days");
+        console.log("test 5days");
         const weatherResponse = await get5DaysWeather(latitude, longitude);
         const weatherData = weatherResponse.data;
         //console.log(weatherData);
